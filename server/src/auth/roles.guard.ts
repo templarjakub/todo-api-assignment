@@ -9,7 +9,7 @@ export class RolesGuard implements CanActivate {
         if (!userProfile) {
             throw new UnauthorizedException({
                 uuAppErrorMap: {
-                    "todo-firstweek/auth/unauthorized": {
+                    "todo-api-assignment/auth/unauthorized": {
                         type: "error",
                         message: "Authentication failed. Missing 'x-user-profile' header."
                     }

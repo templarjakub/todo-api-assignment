@@ -1,9 +1,9 @@
-import { IsString, IsUUID, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class AddMemberDto {
     @ApiProperty({ description: 'The ID of the list to add the member to', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     listId: string;
 
     @ApiProperty({ description: 'The name of the invited collaborator' })
@@ -14,10 +14,10 @@ export class AddMemberDto {
 
 export class RemoveMemberDto {
     @ApiProperty({ description: 'The ID of the list', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     listId: string;
 
     @ApiProperty({ description: 'The specific user ID of the member to remove', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     userId: string;
 }

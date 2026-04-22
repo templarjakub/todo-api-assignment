@@ -1,9 +1,9 @@
-import { IsString, IsUUID, IsBoolean, IsNotEmpty } from 'class-validator';
+import { IsString, IsBoolean, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateItemDto {
     @ApiProperty({ description: 'The ID of the list this item belongs to', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     listId: string;
 
     @ApiProperty({ description: 'The text of the todo item' })
@@ -14,11 +14,11 @@ export class CreateItemDto {
 
 export class UpdateItemDto {
     @ApiProperty({ description: 'The ID of the list', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     listId: string;
 
     @ApiProperty({ description: 'The ID of the specific item to update', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     itemId: string;
 
     @ApiProperty({ description: 'Whether the item is checked off or not' })
@@ -28,10 +28,10 @@ export class UpdateItemDto {
 
 export class DeleteItemDto {
     @ApiProperty({ description: 'The ID of the list', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     listId: string;
 
     @ApiProperty({ description: 'The ID of the specific item to delete', format: 'uuid' })
-    @IsUUID()
+    @IsString()
     itemId: string;
 }

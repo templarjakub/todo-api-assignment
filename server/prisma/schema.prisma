@@ -1,13 +1,36 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model List {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  ownerId    String
+  isArchived Boolean @default(false)
+
+  items   Item[]
+  members Member[]
+}
+
+model Item {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  text       String
+  isResolved Boolean @default(false)
+
+  listId String @db.ObjectId
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+}
+
+model Member {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  userId String
+
+  listId String @db.ObjectId
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
 }
