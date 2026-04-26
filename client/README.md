@@ -1,53 +1,76 @@
-todo-firstweek
-A modern, high-performance shopping list and task management application built with React 19 and Vite 6. This project features a modern design system, global state management, and owner-based permission logic.
+```markdown
+# 🛒 Shopping List Application (Frontend Client)
 
-🚀 Tech Stack
-Frontend Framework: React 19.
+This is the frontend user interface for the Shopping List assignment. It is a modern, responsive Single Page Application (SPA) built to manage collaborative shopping lists. 
 
-Build Tool: Vite 6.
+## 🛠 Tech Stack
 
-Styling: Tailwind CSS v3 (PostCSS integrated).
+* **Framework**: React 18
+* **Build Tool**: Vite
+* **Language**: TypeScript
+* **Routing**: React Router v7 (`react-router-dom`)
+* **State Management**: Zustand
+* **Styling**: Tailwind CSS & PostCSS
+* **Icons**: Lucide React
 
-State Management: Zustand (Global Store).
+## 📂 Project Structure
 
-Icons: Lucide React.
+The client application is organized by feature and responsibility:
 
-✨ Key Features
-List Detail View: A centralized dashboard to manage items and collaborators.
+```text
+client/src/
+  ├── components/   # Reusable UI components (Modals, Headers, Rows)
+  ├── pages/        # Route-level components (Overview, Detail View)
+  ├── store/        # Zustand state management (useListStore.ts)
+  ├── types/        # TypeScript interfaces (ShoppingList, Item, Member)
+  ├── App.tsx       # Root component and Router configuration
+  └── main.tsx      # React DOM entry point
+```
 
-Member Management: Owners can invite new members and manage existing collaborators.
+## 🚀 Getting Started
 
-Ownership Logic: Dynamic UI that toggles features (like Archive or Remove Member) based on whether the user is an OWNER or MEMBER.
+### 1. Installation
 
-Global State: Persistent-ready data architecture using Zustand to handle list updates across components.
+Ensure you are using `pnpm` as your package manager. From the `client` directory, run:
 
-Responsive Design: Optimized for both desktop and mobile viewing using Tailwind's utility-first approach.
+```bash
+pnpm install
+```
 
-📂 Project Structure
-Plaintext
-src/
-├── components/   # Reusable UI (ItemRow, ItemManager, MemberManager, etc.)
-├── pages/        # Route-level views (ListDetailView)
-├── store/        # Zustand global state (useListStore)
-├── types/        # TypeScript interfaces and models
-├── App.tsx       # Root application component
-└── index.css     # Tailwind directives and custom design tokens
-🛠️ Getting Started
-Prerequisites
-Node.js (v24.14.0 or higher recommended)
+### 2. Development Server
 
-npm (v11.9.0 or higher)
+Start the local Vite development server with Hot Module Replacement (HMR):
 
-Installation
-Clone the repository and install dependencies:
+```bash
+pnpm run dev
+```
+The application will be available at **http://localhost:5173** (or the next available port assigned by Vite).
 
-Bash
-npm install
-Start the development server:
+### 3. Production Build
 
-Bash
-npm run dev
-Open in browser:
-Navigate to http://localhost:5173 to view the application.
+To compile the application for production deployment or assignment submission:
 
-<img width="3045" height="2165" alt="image" src="https://github.com/user-attachments/assets/0c2fecf6-13e6-41a8-803e-29966af6e869" />
+```bash
+pnpm run build
+```
+This will bundle the React application and output the optimized, static files into the `dist/` directory.
+
+## 🗺️ Routing Architecture
+
+The application implements client-side routing with the following structure:
+
+| Route | Component | Description |
+| :--- | :--- | :--- |
+| `/` | `<ListsOverview />` | Displays all shopping lists as interactive tiles. Includes functionality to create new lists and delete existing ones via modals. |
+| `/list/:id` | `<ListDetailView />` | Displays the specific contents of a shopping list. Handles adding/removing members, renaming the list, and toggling/deleting items. |
+
+## 🧠 State Management (Zustand)
+
+Global application state is managed via Zustand in `useListStore.ts`.
+
+As per assignment requirements, the initial state is populated by a constant containing default shopping lists. The store manages an array of `ShoppingList` objects and exposes actions to mutate both the lists and their nested entities (Items and Members).
+```
+
+---
+
+With this README in place, your frontend documentation is completely synchronized with the actual codebase we just built!

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
-import { useListStore } from '../store/useListStore'; // Ensure this path is correct
+import { useListStore } from '../store/useListStore';
 import { ListHeader } from '../components/ListHeader';
 import { MemberManager } from '../components/MemberManager';
 import { ItemManager } from '../components/ItemManager';
 
 export const ListDetailView: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
+
     const {
-        list,
+        lists,
         currentUserId,
         addMember,
         removeMember,
@@ -17,8 +21,19 @@ export const ListDetailView: React.FC = () => {
         deleteItem
     } = useListStore();
 
+    const list = lists.find(l => l.id === id);
+
     const [currentUserRole, setCurrentUserRole] = useState<'OWNER' | 'MEMBER'>('OWNER');
     const isOwner = currentUserRole === 'OWNER';
+
+    if (!list) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+                <h1 className="text-2xl font-black uppercase">List not found!</h1>
+                <Link to="/" className="text-indigo-600 font-bold hover:underline">Return to Dashboard</Link>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
@@ -35,7 +50,9 @@ export const ListDetailView: React.FC = () => {
             </div>
 
             <div className="max-w-3xl mx-auto">
-                <button className="flex items-center gap-2 text-gray-400 hover:text-gray-800 mb-6 font-black uppercase text-[10px] tracking-widest transition-colors">
+                <button
+                    onClick={() => navigate('/')}
+                    className="flex items-center gap-2 text-gray-400 hover:text-gray-800 mb-6 font-black uppercase text-[10px] tracking-widest transition-colors">
                     <ChevronLeft size={14} /> Back to Dashboard
                 </button>
 
@@ -43,21 +60,21 @@ export const ListDetailView: React.FC = () => {
                     <ListHeader
                         name={list.name}
                         isOwner={isOwner}
-                        onRename={renameList}
+                        onRename={(newName) => renameList(list.id, newName)}
                         onArchive={() => alert("Archived!")}/>
 
                     <MemberManager
                         members={list.members}
                         isOwner={isOwner}
                         currentUserId={currentUserId}
-                        onAddMember={addMember}
-                        onRemoveMember={removeMember}/>
+                        onAddMember={(name) => addMember(list.id, name)}
+                        onRemoveMember={(userId) => removeMember(list.id, userId)}/>
 
                     <ItemManager
                         items={list.items}
-                        onAddItem={addItem}
-                        onToggleItem={toggleItem}
-                        onDeleteItem={deleteItem}/>
+                        onAddItem={(text) => addItem(list.id, text)}
+                        onToggleItem={(itemId) => toggleItem(list.id, itemId)}
+                        onDeleteItem={(itemId) => deleteItem(list.id, itemId)}/>
                 </div>
             </div>
         </div>
