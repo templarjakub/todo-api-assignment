@@ -69,4 +69,3 @@ The application implements client-side routing with the following structure:
 Global application state is managed via Zustand in `useListStore.ts`.
 
 As per assignment requirements, the initial state is populated by a constant containing default shopping lists. The store manages an array of `ShoppingList` objects and exposes actions to mutate both the lists and their nested entities (Items and Members).
-```
