@@ -6,38 +6,38 @@ export class CreateListDto {
     @IsString()
     @IsNotEmpty()
     @MaxLength(50)
-    name: string;
+    name!: string;
 }
 
 export class GetListDto {
     @ApiProperty({ description: 'The unique ID of the shopping list to retrieve' })
     @IsString()
     @IsNotEmpty()
-    id: string;
+    id!: string;
 }
 
 export class UpdateListDto {
     @ApiProperty({ description: 'The unique ID of the shopping list' })
     @IsString()
     @IsNotEmpty()
-    id: string;
+    id!: string;
 
     @ApiProperty({ description: 'The new name of the list (max 50 chars)', maxLength: 50 })
     @IsString()
     @IsNotEmpty()
     @MaxLength(50)
-    name: string;
+    name!: string;
 }
 
 export class DeleteListDto {
     @ApiProperty({ description: 'The unique ID of the shopping list to delete' })
     @IsString()
     @IsNotEmpty()
-    id: string;
+    id!: string;
 }
 
 export class ArchiveListDto {
-    @ApiProperty({ description: 'The unique ID of the shopping list to archive', format: 'uuid' })
+    @ApiProperty({ description: 'The unique ID of the shopping list to archive'})
     @IsString()
-    id: string;
+    id!: string;
 }

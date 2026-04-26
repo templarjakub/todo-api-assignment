@@ -1,8 +1,10 @@
-import { Controller, Post, Body, UseGuards, Headers, ForbiddenException } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, ForbiddenException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiHeader } from '@nestjs/swagger';
-import {CreateListDto, GetListDto, UpdateListDto, DeleteListDto, ArchiveListDto} from './list.dto';
+import { CreateListDto, GetListDto, UpdateListDto, DeleteListDto, ArchiveListDto } from './list.dto';
 import { RolesGuard } from '../auth/roles.guard';
 import { ListService } from './list.service';
+
+import { UserProfile } from '../auth/profile.decorator';
 
 @ApiTags('List Management')
 @Controller('list')
@@ -13,7 +15,7 @@ export class ListController {
 
     @Post('create')
     @ApiOperation({ summary: 'Creates a new shopping list (Owner Only)' })
-    async createList(@Body() dtoIn: CreateListDto, @Headers('x-user-profile') profile: string) {
+    async createList(@Body() dtoIn: CreateListDto, @UserProfile() profile: string) {
         if (profile !== 'Owner') this.throwForbidden(profile);
 
         const list = await this.listService.create(dtoIn, 'u123');
@@ -36,7 +38,7 @@ export class ListController {
 
     @Post('update')
     @ApiOperation({ summary: 'Renames the shopping list (Owner Only)' })
-    async updateList(@Body() dtoIn: UpdateListDto, @Headers('x-user-profile') profile: string) {
+    async updateList(@Body() dtoIn: UpdateListDto, @UserProfile('x-user-profile') profile: string) {
         if (profile !== 'Owner') this.throwForbidden(profile);
         const updatedList = await this.listService.update(dtoIn);
         return { dtoOut: updatedList, uuAppErrorMap: {} };
@@ -44,7 +46,7 @@ export class ListController {
 
     @Post('delete')
     @ApiOperation({ summary: 'Deletes a shopping list (Owner Only)' })
-    async deleteList(@Body() dtoIn: DeleteListDto, @Headers('x-user-profile') profile: string) {
+    async deleteList(@Body() dtoIn: DeleteListDto, @UserProfile('x-user-profile') profile: string) {
         if (profile !== 'Owner') this.throwForbidden(profile);
         const deletedList = await this.listService.delete(dtoIn.id);
         return { dtoOut: deletedList, uuAppErrorMap: {} };
@@ -52,7 +54,7 @@ export class ListController {
 
     @Post('archive')
     @ApiOperation({ summary: 'Archives the shopping list (Owner Only)' })
-    archiveList(@Body() dtoIn: ArchiveListDto, @Headers('x-user-profile') profile: string) {
+    archiveList(@Body() dtoIn: ArchiveListDto, @UserProfile('x-user-profile') profile: string) {
         if (profile !== 'Owner') this.throwForbidden(profile);
         return { dtoIn, uuAppErrorMap: {} };
     }

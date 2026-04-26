@@ -1,8 +1,10 @@
-import { Controller, Post, Body, UseGuards, ForbiddenException, Headers } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, ForbiddenException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiHeader } from '@nestjs/swagger';
 import { AddMemberDto, RemoveMemberDto } from './member.dto';
 import { RolesGuard } from '../auth/roles.guard';
 import { MemberService } from './member.service';
+
+import { UserProfile } from '../auth/profile.decorator';
 
 @ApiTags('Member Management')
 @Controller('member')
@@ -13,7 +15,7 @@ export class MemberController {
 
     @Post('add')
     @ApiOperation({ summary: 'Invites a new member to the list (Owner Only)' })
-    async addMember(@Body() dtoIn: AddMemberDto, @Headers('x-user-profile') profile: string) {
+    async addMember(@Body() dtoIn: AddMemberDto, @UserProfile() profile: string) {
         if (profile !== 'Owner') this.throwForbidden(profile);
         const member = await this.memberService.add(dtoIn);
         return { dtoOut: member, uuAppErrorMap: {} };
@@ -21,7 +23,7 @@ export class MemberController {
 
     @Post('remove')
     @ApiOperation({ summary: 'Removes a member from the list (Owner Only)' })
-    async removeMember(@Body() dtoIn: RemoveMemberDto, @Headers('x-user-profile') profile: string) {
+    async removeMember(@Body() dtoIn: RemoveMemberDto, @UserProfile() profile: string) {
         if (profile !== 'Owner') this.throwForbidden(profile);
         const result = await this.memberService.remove(dtoIn);
         return { dtoOut: result, uuAppErrorMap: {} };
