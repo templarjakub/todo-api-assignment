@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Trash2, Users } from 'lucide-react';
 import { useListStore } from '../store/useListStore';
@@ -6,11 +6,19 @@ import { CreateListModal } from '../components/CreateListModal';
 import { DeleteConfirmationModal } from '../components/DeleteConfirmationModal';
 
 export const ListsOverview: React.FC = () => {
-    const { lists, deleteList } = useListStore();
+    const { lists, deleteList, fetchLists, isLoading } = useListStore();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchLists();
+    }, [fetchLists]);
 
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [listToDelete, setListToDelete] = useState<string | null>(null);
+
+    if (isLoading) {
+        return <div className="min-h-screen flex items-center justify-center font-black uppercase">Loading Lists...</div>;
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 p-8">
