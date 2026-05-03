@@ -1,6 +1,13 @@
-import { Controller, Post, Body, UseGuards, ForbiddenException } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiHeader } from '@nestjs/swagger';
-import { CreateListDto, GetListDto, UpdateListDto, DeleteListDto, ArchiveListDto } from './list.dto';
+import {Controller, Post, Body, UseGuards, ForbiddenException, HttpCode} from '@nestjs/common';
+import {ApiTags, ApiOperation, ApiHeader, ApiResponse} from '@nestjs/swagger';
+import {
+    CreateListDto,
+    GetListDto,
+    UpdateListDto,
+    DeleteListDto,
+    ArchiveListDto,
+    ListWrapperResponseDto
+} from './list.dto';
 import { RolesGuard } from '../auth/roles.guard';
 import { ListService } from './list.service';
 
@@ -30,7 +37,9 @@ export class ListController {
     }
 
     @Post('list')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Retrieves all shopping lists' })
+    @ApiResponse({ status: 200, description: 'List of all shopping lists', type: ListWrapperResponseDto })
     async listLists() {
         const lists = await this.listService.list();
         return { dtoOut: lists, uuAppErrorMap: {} };

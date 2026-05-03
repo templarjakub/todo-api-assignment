@@ -12,6 +12,10 @@ export class ListService {
                 name: dto.name,
                 ownerId: ownerId,
             },
+            include: {
+                items: true,
+                members: true
+            }
         });
     }
 
@@ -23,7 +27,12 @@ export class ListService {
     }
 
     async list() {
-        return this.prisma.list.findMany();
+        return this.prisma.list.findMany({
+            include: {
+                items: true,
+                members: true
+            }
+        });
     }
 
     async update(dto: UpdateListDto) {

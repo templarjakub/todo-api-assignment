@@ -41,3 +41,32 @@ export class ArchiveListDto {
     @IsString()
     id!: string;
 }
+
+class MinimalItemDto {
+    @ApiProperty() id!: string;
+    @ApiProperty() text!: string;
+    @ApiProperty() isResolved!: boolean;
+}
+
+class MinimalMemberDto {
+    @ApiProperty() id!: string;
+    @ApiProperty() name!: string;
+}
+
+export class ListResponseDto {
+    @ApiProperty() id!: string;
+    @ApiProperty() name!: string;
+    @ApiProperty() ownerId!: string;
+    @ApiProperty() isArchived!: boolean;
+
+    @ApiProperty({ type: [MinimalItemDto] }) items!: MinimalItemDto[];
+    @ApiProperty({ type: [MinimalMemberDto] }) members!: MinimalMemberDto[];
+}
+
+export class ListWrapperResponseDto {
+    @ApiProperty({ type: [ListResponseDto] })
+    dtoOut!: ListResponseDto[];
+
+    @ApiProperty()
+    uuAppErrorMap!: Record<string, any>;
+}
