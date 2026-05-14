@@ -1,0 +1,55 @@
+{
+  "common": {
+    "cancel": "Zrušit",
+    "create": "Vytvořit",
+    "loading": "Načítání seznamů...",
+    "you": "Vy",
+    "owner": "Vlastník",
+    "member": "Člen",
+    "collaborator": "Spolupracovník"
+  },
+  "overview": {
+    "title": "Moje nákupní seznamy",
+    "newList": "Nový seznam",
+    "members": "Členové",
+    "items": "Položky"
+  },
+  "detail": {
+    "notFound": "Seznam nenalezen!",
+    "returnDash": "Zpět na nástěnku",
+    "devView": "Dev Pohled",
+    "viewingAs": "Zobrazit jako",
+    "switchTo": "Přepnout na",
+    "backToDash": "Zpět na nástěnku",
+    "archive": "Archivovat",
+    "archivedAlert": "Archivováno!"
+  },
+  "modals": {
+    "createTitle": "Vytvořit nový seznam",
+    "createPlaceholder": "Název seznamu (např. Výlet pod stan)",
+    "deleteTitle": "Jste si jistí?",
+    "deleteDesc": "Tímto trvale smažete tento nákupní seznam a všechny jeho položky.",
+    "deleteKeep": "Ne, ponechat",
+    "deleteConfirm": "Ano, smazat"
+  },
+  "items": {
+    "title": "Položky seznamu",
+    "showAll": "Zobrazit vše",
+    "unresolved": "Nevyřešené",
+    "placeholder": "Přidat položku...",
+    "addBtn": "Přidat",
+    "deleteAria": "Smazat položku"
+  },
+  "members": {
+    "title": "Členové",
+    "addBtn": "+ Přidat člena",
+    "placeholder": "Jméno přítele...",
+    "invite": "Pozvat"
+  },
+  "statistics": {
+    "title": "Statistiky seznamu",
+    "resolved": "Vyřešeno",
+    "unresolved": "Nevyřešeno",
+    "noData": "Přidejte položky pro zobrazení statistik"
+  }
+}

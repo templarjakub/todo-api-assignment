@@ -1,0 +1,55 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "create": "Create",
+    "loading": "Loading Lists...",
+    "you": "You",
+    "owner": "Owner",
+    "member": "Member",
+    "collaborator": "Collaborator"
+  },
+  "overview": {
+    "title": "My Shopping Lists",
+    "newList": "New List",
+    "members": "Members",
+    "items": "Items"
+  },
+  "detail": {
+    "notFound": "List not found!",
+    "returnDash": "Return to Dashboard",
+    "devView": "Dev View",
+    "viewingAs": "Viewing as",
+    "switchTo": "Switch to",
+    "backToDash": "Back to Dashboard",
+    "archive": "Archive",
+    "archivedAlert": "Archived!"
+  },
+  "modals": {
+    "createTitle": "Create New List",
+    "createPlaceholder": "List name (e.g., Camping Trip)",
+    "deleteTitle": "Are you sure?",
+    "deleteDesc": "This will permanently delete this shopping list and all its items.",
+    "deleteKeep": "No, Keep it",
+    "deleteConfirm": "Yes, Delete"
+  },
+  "items": {
+    "title": "List Items",
+    "showAll": "Show All",
+    "unresolved": "Unresolved",
+    "placeholder": "Add item...",
+    "addBtn": "Add",
+    "deleteAria": "Delete item"
+  },
+  "members": {
+    "title": "Members",
+    "addBtn": "+ Add Member",
+    "placeholder": "Friend's name...",
+    "invite": "Invite"
+  },
+  "statistics": {
+    "title": "List Statistics",
+    "resolved": "Resolved",
+    "unresolved": "Unresolved",
+    "noData": "Add items to see statistics"
+  }
+}
